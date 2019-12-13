@@ -1,0 +1,2 @@
+# MyfirstGo
+Trying out Goloang
