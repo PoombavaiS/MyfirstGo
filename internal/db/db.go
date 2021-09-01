@@ -1,11 +1,11 @@
 package db
 
 import (
-	"context"
-	"fmt"
-	"os"
+	"log"
+	"strconv"
 
-	pgx "github.com/jackc/pgx/v4"
+	config "github.com/PoombavaiS/MyfirstGo/internal/configs"
+	pgx "gopkg.in/jackc/pgx.v2"
 )
 
 var cPool *pgx.ConnPool
@@ -15,12 +15,31 @@ type DBConnection struct {
 }
 
 func init() {
-	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
+	var err error
+
+	p, _ := strconv.ParseUint(config.Port, 0, 16)
+	config := pgx.ConnConfig{
+		User:     config.Server,
+		Password: config.Password,
+		Host:     config.Host,
+		Port:     uint16(p),
+		Database: config.Database,
 	}
-	defer conn.Close(context.Background())
+	cPool, err = pgx.NewConnPool(pgx.ConnPoolConfig{
+		ConnConfig:     config,
+		MaxConnections: 20,
+	})
+	if err != nil {
+		log.Fatalf("Connection error: %s", err)
+	}
+
+	// os.Setenv("DATABASE_URL", "postgres://poombavai:poombavai@localhost:5432/go_training_db?sslmode=disable")
+	// conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
+	// if err != nil {
+	// 	fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+	// 	os.Exit(1)
+	// }
+	// defer conn.Close(context.Background())
 }
 
 func NewConnection() *DBConnection {
