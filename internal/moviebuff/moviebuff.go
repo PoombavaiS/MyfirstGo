@@ -7,7 +7,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetMovie(movie_id string) ([]movie, error) {
+func GetMovie(movie_id string) (*moviebuff.Movie, error) {
+
 	cfg := moviebuff.Config{
 		HostURL:     os.Getenv("MB_URL"), //https://moviepass-v2.herokuapp.com/
 		StaticToken: os.Getenv("MBAPI_TOKEN"),
@@ -16,4 +17,5 @@ func GetMovie(movie_id string) ([]movie, error) {
 	if err != nil {
 		logrus.WithError(err).Errorln("Failed to get Movie Information from Moviebuff for given MovieID")
 	}
+	return movieData, err
 }

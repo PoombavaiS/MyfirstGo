@@ -1,10 +1,13 @@
 package db
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"strconv"
 
 	config "github.com/PoombavaiS/MyfirstGo/internal/configs"
+	"github.com/golang-migrate/migrate/v4"
 	pgx "gopkg.in/jackc/pgx.v2"
 )
 
@@ -15,6 +18,8 @@ type DBConnection struct {
 }
 
 func init() {
+	fmt.Println("Db Init called")
+
 	var err error
 
 	p, _ := strconv.ParseUint(config.Port, 0, 16)
@@ -44,6 +49,19 @@ func init() {
 
 func NewConnection() *DBConnection {
 	return (&DBConnection{ConnPool: cPool})
+}
+
+func Migrations() {
+	m, err := migrate.New(os.Getenv("MIGRATION_FILES"), os.Getenv("DATABASE_URL"))
+	if err != nil {
+		fmt.Println("Error 1")
+		log.Fatal(err)
+	}
+	err = m.Up()
+	if err != nil && err != migrate.ErrNoChange && err != migrate.ErrLocked {
+		fmt.Println("Error 2")
+		log.Fatal(err)
+	}
 }
 
 //var name string
