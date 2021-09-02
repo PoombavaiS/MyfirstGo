@@ -15,6 +15,8 @@ func GetMovie(id string) Movie {
 
 	var movie_id, name string
 	err := dbConn.ConnPool.QueryRow("select * from movies where id = $1", id).Scan(&movie_id, &name)
+	conninfo := dbConn.ConnPool.QueryRow("SELECT CURRENT_USER, SESSION_USER")
+	fmt.Println(conninfo)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
 		os.Exit(1)

@@ -53,6 +53,8 @@ func NewConnection() *DBConnection {
 
 func Migrations() {
 	m, err := migrate.New(os.Getenv("MIGRATION_FILES"), os.Getenv("DATABASE_URL"))
+	fmt.Println(os.Getenv("MIGRATION_FILES"))
+	fmt.Println(os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Println("Error 1")
 		log.Fatal(err)
@@ -63,13 +65,3 @@ func Migrations() {
 		log.Fatal(err)
 	}
 }
-
-//var name string
-//var user_id string
-//err = conn.QueryRow(context.Background(), "select name, user_id from users").Scan(&name, &user_id)
-//if err != nil {
-//	fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
-//	os.Exit(1)
-//}
-
-//fmt.Println(name, user_id)

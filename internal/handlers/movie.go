@@ -8,6 +8,7 @@ import (
 
 	"github.com/PoombavaiS/MyfirstGo/internal/db"
 	"github.com/PoombavaiS/MyfirstGo/internal/moviebuff"
+	"github.com/sirupsen/logrus"
 )
 
 func GetMovies(w http.ResponseWriter, r *http.Request) {
@@ -30,7 +31,12 @@ func GetMovies(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Println("Coudn't upsert data")
 		}
-		movie_json := json.Marshal(movie)
+		movie_json, err := json.Marshal(movie)
+		if err != nil {
+			logrus.Infoln(err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(movie_json)
 	}
