@@ -1,0 +1,42 @@
+# github.com/RealImage/moviebuff-sdk-go v0.0.0-20201118091843-eb3b512102e2
+## explicit
+github.com/RealImage/moviebuff-sdk-go
+# github.com/RealImage/moviebuff-sdk-go/v2 v2.0.1-0.20200819080155-763d5fd943be
+github.com/RealImage/moviebuff-sdk-go/v2
+# github.com/golang-migrate/migrate/v4 v4.14.1
+## explicit
+github.com/golang-migrate/migrate/v4
+github.com/golang-migrate/migrate/v4/database
+github.com/golang-migrate/migrate/v4/database/postgres
+github.com/golang-migrate/migrate/v4/internal/url
+github.com/golang-migrate/migrate/v4/source
+github.com/golang-migrate/migrate/v4/source/file
+github.com/golang-migrate/migrate/v4/source/github
+github.com/golang-migrate/migrate/v4/source/httpfs
+# github.com/google/go-github v17.0.0+incompatible
+github.com/google/go-github/github
+# github.com/google/go-querystring v1.0.0
+github.com/google/go-querystring/query
+# github.com/hashicorp/errwrap v1.0.0
+github.com/hashicorp/errwrap
+# github.com/hashicorp/go-multierror v1.1.0
+github.com/hashicorp/go-multierror
+# github.com/jackc/pgx/v4 v4.13.0
+## explicit
+# github.com/joho/godotenv v1.3.0
+## explicit
+github.com/joho/godotenv
+# github.com/lib/pq v1.10.2
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
+# github.com/sirupsen/logrus v1.8.1
+## explicit
+github.com/sirupsen/logrus
+# golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix
+golang.org/x/sys/windows
+# gopkg.in/jackc/pgx.v2 v2.11.0
+## explicit
+gopkg.in/jackc/pgx.v2
