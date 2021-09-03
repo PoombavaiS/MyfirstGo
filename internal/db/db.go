@@ -37,14 +37,6 @@ func init() {
 	if err != nil {
 		log.Fatalf("Connection error: %s", err)
 	}
-
-	// os.Setenv("DATABASE_URL", "postgres://poombavai:poombavai@localhost:5432/go_training_db?sslmode=disable")
-	// conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
-	// if err != nil {
-	// 	fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-	// 	os.Exit(1)
-	// }
-	// defer conn.Close(context.Background())
 }
 
 func NewConnection() *DBConnection {
@@ -53,8 +45,6 @@ func NewConnection() *DBConnection {
 
 func Migrations() {
 	m, err := migrate.New(os.Getenv("MIGRATION_FILES"), os.Getenv("DATABASE_URL"))
-	fmt.Println(os.Getenv("MIGRATION_FILES"))
-	fmt.Println(os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Println("Error 1")
 		log.Fatal(err)

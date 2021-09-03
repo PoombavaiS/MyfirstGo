@@ -1,6 +1,7 @@
 package moviebuff
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/RealImage/moviebuff-sdk-go"
@@ -9,8 +10,9 @@ import (
 
 func GetMovie(movie_id string) (*moviebuff.Movie, error) {
 
+	fmt.Println("Fetch from MB")
 	cfg := moviebuff.Config{
-		HostURL:     os.Getenv("MB_URL"), //https://moviepass-v2.herokuapp.com/
+		HostURL:     os.Getenv("MB_URL"),
 		StaticToken: os.Getenv("MBAPI_TOKEN"),
 	}
 	movieData, err := moviebuff.New(cfg).GetMovie(movie_id)

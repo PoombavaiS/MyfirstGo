@@ -14,14 +14,13 @@ func GetMovie(id string) Movie {
 	dbConn := NewConnection()
 
 	var movie_id, name string
-	err := dbConn.ConnPool.QueryRow("select * from movies where id = $1", id).Scan(&movie_id, &name)
-	conninfo := dbConn.ConnPool.QueryRow("SELECT CURRENT_USER, SESSION_USER")
-	fmt.Println(conninfo)
+	err := dbConn.ConnPool.QueryRow("select id, name from movies where id = $1", id).Scan(&movie_id, &name)
 	if err != nil {
+		fmt.Println("Movie NOT found in DB")
 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
-		os.Exit(1)
 	}
 	movie := Movie{}
+	fmt.Println(movie)
 	if len(name) > 0 {
 		movie.ID = movie_id
 		movie.Name = name
@@ -31,6 +30,7 @@ func GetMovie(id string) Movie {
 
 func UpsertMovie(m Movie) error {
 	dbConn := NewConnection()
+	fmt.Println("Insert Movie")
 	_, err := dbConn.ConnPool.Exec("Insert into movies(id, name) values($1,$2) ON CONFLICT (id) DO UPDATE SET name = $2", m.ID, m.Name)
 	return err
 }
